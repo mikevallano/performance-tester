@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181016001927) do
+ActiveRecord::Schema.define(version: 20181016003036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,6 +65,15 @@ ActiveRecord::Schema.define(version: 20181016001927) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "salesreps", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "sales_division_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sales_division_id"], name: "index_salesreps_on_sales_division_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -85,4 +94,5 @@ ActiveRecord::Schema.define(version: 20181016001927) do
   add_foreign_key "customers", "customer_companies"
   add_foreign_key "product_order_items", "products"
   add_foreign_key "products", "product_categories"
+  add_foreign_key "salesreps", "sales_divisions"
 end
