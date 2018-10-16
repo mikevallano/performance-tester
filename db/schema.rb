@@ -10,10 +10,81 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170910152726) do
+ActiveRecord::Schema.define(version: 20181016003914) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "customer_companies", force: :cascade do |t|
+    t.string "name"
+    t.integer "tax_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.bigint "customer_company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_company_id"], name: "index_customers_on_customer_company_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.bigint "product_order_item_id"
+    t.bigint "customer_id"
+    t.bigint "salesrep_id"
+    t.date "finalized_on"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+    t.index ["product_order_item_id"], name: "index_orders_on_product_order_item_id"
+    t.index ["salesrep_id"], name: "index_orders_on_salesrep_id"
+  end
+
+  create_table "product_categories", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_order_items", force: :cascade do |t|
+    t.integer "quantity"
+    t.float "price_per_unit"
+    t.float "sum_price"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_order_items_on_product_id"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.float "base_price"
+    t.bigint "product_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_category_id"], name: "index_products_on_product_category_id"
+  end
+
+  create_table "sales_divisions", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "salesreps", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.bigint "sales_division_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sales_division_id"], name: "index_salesreps_on_sales_division_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,4 +103,11 @@ ActiveRecord::Schema.define(version: 20170910152726) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "customers", "customer_companies"
+  add_foreign_key "orders", "customers"
+  add_foreign_key "orders", "product_order_items"
+  add_foreign_key "orders", "salesreps"
+  add_foreign_key "product_order_items", "products"
+  add_foreign_key "products", "product_categories"
+  add_foreign_key "salesreps", "sales_divisions"
 end
