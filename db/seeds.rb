@@ -36,3 +36,41 @@ else
   puts "already 100 product_order_items exist. none created."
 end
 
+if CustomerCompany.count < 100
+  100.times do
+    FactoryGirl.create(:customer_company)
+  end
+  puts '100 customer_companies created'
+end
+
+if Customer.count < 100
+  100.times do
+    FactoryGirl.create(:customer, customer_company: CustomerCompany.all.sample)
+  end
+  puts '100 customers created'
+end
+
+if SalesDivision.count < 10
+  10.times do
+    FactoryGirl.create(:sales_division)
+  end
+  puts '10 sales_divisions created'
+end
+
+if Salesrep.count < 100
+  100.times do
+    FactoryGirl.create(:salesrep, sales_division: SalesDivision.all.sample)
+  end
+  puts '100 salesreps created'
+end
+
+if Order.count < 100
+  100.times do
+    FactoryGirl.create(:order,
+                        product_order_item: ProductOrderItem.all.sample,
+                        customer: Customer.all.sample,
+                        salesrep: Salesrep.all.sample)
+  end
+  puts '100 orders created'
+end
+
