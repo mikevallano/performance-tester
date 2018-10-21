@@ -11,10 +11,10 @@ RSpec.describe Order, type: :model do
 
   describe 'relationships' do
     it { is_expected.to belong_to(:customer) }
-    it { is_expected.to belong_to(:product_order_item) }
     it { is_expected.to belong_to(:salesrep) }
-    it { is_expected.to have_one(:product) }
-    it { is_expected.to have_one(:product_category) }
+    it { is_expected.to have_many(:products) }
+    it { is_expected.to have_many(:order_items) }
+    it { is_expected.to have_many(:product_categories) }
     it { is_expected.to have_one(:sales_division) }
   end
 end
