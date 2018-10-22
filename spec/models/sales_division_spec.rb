@@ -14,9 +14,9 @@ RSpec.describe SalesDivision, type: :model do
   describe 'relationships' do
     it { is_expected.to have_many(:salesreps) }
     it { is_expected.to have_many(:orders) }
-    it { is_expected.to have_many(:product_order_items) }
+    it { is_expected.to have_many(:order_items) }
     it { is_expected.to have_many(:customers) }
-    it { is_expected.to have_many(:customer_companies) }
+    it { is_expected.to have_many(:companies) }
     it { is_expected.to have_many(:products) }
     it { is_expected.to have_many(:product_categories) }
   end

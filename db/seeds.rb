@@ -27,25 +27,25 @@ else
   puts "already 100 products. none created."
 end
 
-if ProductOrderItem.count < 100
+if OrderItem.count < 100
   100.times do
-    FactoryGirl.create(:product_order_item, product: Product.all.sample)
+    FactoryGirl.create(:order_item, product: Product.all.sample)
   end
-  puts "100 product_order_items created"
+  puts "100 order_items created"
 else
-  puts "already 100 product_order_items exist. none created."
+  puts "already 100 order_items exist. none created."
 end
 
-if CustomerCompany.count < 100
+if Company.count < 100
   100.times do
-    FactoryGirl.create(:customer_company)
+    FactoryGirl.create(:company)
   end
-  puts '100 customer_companies created'
+  puts '100 companies created'
 end
 
 if Customer.count < 100
   100.times do
-    FactoryGirl.create(:customer, customer_company: CustomerCompany.all.sample)
+    FactoryGirl.create(:customer, company: Company.all.sample)
   end
   puts '100 customers created'
 end

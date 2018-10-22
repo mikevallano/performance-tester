@@ -8,8 +8,8 @@ RSpec.describe Customer, type: :model do
       expect(customer).to be_valid
     end
 
-    it 'is not valid without a customer_company' do
-      customer.customer_company = nil
+    it 'is not valid without a company' do
+      customer.company = nil
       expect(customer).not_to be_valid
     end
 
@@ -19,9 +19,9 @@ RSpec.describe Customer, type: :model do
   end
 
   describe 'relationships' do
-    it { is_expected.to belong_to(:customer_company) }
+    it { is_expected.to belong_to(:company) }
     it { is_expected.to have_many(:orders) }
-    it { is_expected.to have_many(:product_order_items) }
+    it { is_expected.to have_many(:order_items) }
     it { is_expected.to have_many(:salesreps) }
     it { is_expected.to have_many(:sales_divisions) }
     it { is_expected.to have_many(:products) }
