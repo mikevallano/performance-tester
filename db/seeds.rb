@@ -27,15 +27,6 @@ else
   puts "already 100 products. none created."
 end
 
-if OrderItem.count < 100
-  100.times do
-    FactoryGirl.create(:order_item, product: Product.all.sample)
-  end
-  puts "100 order_items created"
-else
-  puts "already 100 order_items exist. none created."
-end
-
 if Company.count < 100
   100.times do
     FactoryGirl.create(:company)
@@ -67,10 +58,25 @@ end
 if Order.count < 100
   100.times do
     FactoryGirl.create(:order,
-                        product_order_item: ProductOrderItem.all.sample,
                         customer: Customer.all.sample,
                         salesrep: Salesrep.all.sample)
   end
   puts '100 orders created'
 end
+
+if OrderItem.count < 200
+  200.times do
+    FactoryGirl.create(:order_item, product: Product.all.sample, order: Order.all.sample)
+  end
+  puts "200 order_items created"
+  order_ids = OrderItem.pluck(:order_id)
+  orders_without_products = Order.where.not(id: order_ids)
+  puts "orders_without_products count: #{orders_without_products.count}. creating more order items..."
+  orders_without_products.each do |order|
+    FactoryGirl.create(:order_item, product: Product.all.sample, order: order)
+  end
+else
+  puts "already 100 order_items exist. none created."
+end
+
 
