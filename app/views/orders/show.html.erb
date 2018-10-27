@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title">Order Info</h2>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>Order ID:</strong> <%= @order.id %></li>
+      <li class="list-group-item"><strong>Finalized on:</strong> <%= @order.finalized_on %></li>
+      <li class="list-group-item"><strong>Customer:</strong> <%= @order.customer.first_name %></li>
+      <li class="list-group-item"><strong>Sales rep:</strong> <%= @order.salesrep.first_name %></li>
+      <li class="list-group-item"><strong>Products:</strong> <%= @order.products.pluck(:name).join(', ') %></li>
+      <li class="list-group-item"><strong>Sum Total:</strong> <%= @order.sum_total %></li>
+    </ul>
+    <%= link_to 'View all orders', orders_path, class: "btn btn-sm btn-info" %>
+  </div>
+</div>
