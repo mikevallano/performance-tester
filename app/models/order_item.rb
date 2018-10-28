@@ -1,6 +1,6 @@
 class OrderItem < ApplicationRecord
   belongs_to :product
-  belongs_to :order
+  belongs_to :order, touch: true
   has_one :product_category, through: :product
   has_one :customer, through: :order
   has_one :company, through: :customer

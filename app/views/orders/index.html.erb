@@ -10,14 +10,6 @@
   </thead>
 
   <tbody>
-    <% @orders.each do |order| %>
-      <tr>
-        <td><%= order.customer.first_name %></td>
-        <td><%= order.salesrep.first_name %></td>
-        <td><%= order.sum_total %></td>
-        <td><%= order.products.pluck(:name).join(', ') %></td>
-        <td><%= link_to 'View', order_path(order.id), class: 'btn btn-sm btn-info' %></td>
-      </tr>
-    <% end %>
+    <%= render 'order', collection: @orders, cached: true %>
   </tbody>
 </table>

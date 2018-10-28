@@ -13,7 +13,8 @@ Rails.application.configure do
   config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
-  if Rails.root.join('tmp/caching-dev.txt').exist?
+  chache_in_dev_mode = true
+  if chache_in_dev_mode
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
@@ -28,7 +29,7 @@ Rails.application.configure do
 
   config.after_initialize do
     Bullet.enable = true
-    Bullet.alert = true
+    # Bullet.alert = true
     Bullet.add_footer
     Bullet.bullet_logger = true
   end

@@ -8,6 +8,9 @@ class Order < ApplicationRecord
   has_many :product_categories, through: :products
 
   def sum_total
-    order_items.pluck(:sum_price).inject(:+)
+    Rails.cache.fetch("order_#{id}_#{updated_at}") do
+      # puts "fetching sum total from cache"
+      order_items.pluck(:sum_price).inject(:+)
+    end
   end
 end
