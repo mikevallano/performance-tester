@@ -86,7 +86,7 @@ GEM
       factory_girl (~> 4.8.0)
       railties (>= 3.0.0)
     ffaker (2.6.0)
-    ffi (1.9.18)
+    ffi (1.9.25)
     formatador (0.2.5)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
@@ -284,6 +284,7 @@ DEPENDENCIES
   devise
   factory_girl_rails
   ffaker
+  ffi (~> 1.9.25)
   guard-rspec
   jbuilder (~> 2.5)
   jquery-rails
@@ -310,5 +311,8 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webmock
 
+RUBY VERSION
+   ruby 2.6.1p33
+
 BUNDLED WITH
-   1.16.0.pre.2
+   1.17.2
