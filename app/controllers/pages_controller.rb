@@ -9,8 +9,12 @@ class PagesController < ApplicationController
   end
 
   def csv_upload
-    BulkUploadCritters.call(file_data: csv_params[:file])
-    flash[:notice] = 'yay!'
+    result = BulkUploadCritters.call(file_data: csv_params[:file])
+    if result[:failure].present?
+      flash[:error] = result[:failure]
+    else
+      flash[:notice] = 'The csv has been processed'
+    end
     redirect_to csv_tester_path
   end
 

@@ -6,7 +6,8 @@ RSpec.describe BulkUploadCritters, type: :service do
     ActionDispatch::Http::UploadedFile.new(
       tempfile: csv_file,
       filename: File.basename(csv_file),
-      type: 'text/csv')
+      type: 'text/csv'
+    )
   end
 
   context 'success' do
